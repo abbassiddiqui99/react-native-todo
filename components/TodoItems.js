@@ -8,6 +8,12 @@ const TodoItems = ({
   navigation,
   getDataHandler,
 }) => {
+  const getDatafromHome = (id) => {
+    const dataValue = getDataHandler(id);
+    // console.log("daraValue todoItems", dataValue);
+    navigation.navigate("EditForm", { dataValue });
+  };
+
   return (
     <TouchableOpacity>
       <View style={styles.container}>
@@ -15,14 +21,7 @@ const TodoItems = ({
         {/* <Button title="Delete" /> */}
         <View style={styles.testing}>
           <TouchableOpacity>
-            <Text
-              style={styles.edit}
-              onPress={() =>
-                navigation.navigate("EditForm", {
-                  // itemId: id,
-                })
-              }
-            >
+            <Text style={styles.edit} onPress={() => getDatafromHome(id)}>
               Edit
             </Text>
           </TouchableOpacity>

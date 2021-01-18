@@ -37,7 +37,8 @@ const Home = ({ navigation }) => {
 
   const getDataHandler = (id) => {
     const getData = data.filter((item) => item.id === id);
-    console.log(getData);
+    // console.log(getData);
+    return getData;
   };
 
   const onSubmitHandler = (text) => {
