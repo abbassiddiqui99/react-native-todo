@@ -1,7 +1,8 @@
 import React from "react";
-import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
 import { deleteItem } from "./actions/actions";
+import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 
 const TodoItems = ({ item, id, navigation }) => {
   const dispatch = useDispatch();
@@ -13,7 +14,6 @@ const TodoItems = ({ item, id, navigation }) => {
     <TouchableOpacity>
       <View style={styles.container}>
         <Text style={styles.item}>{item}</Text>
-        {/* <Button title="Delete" /> */}
         <View style={styles.testing}>
           <TouchableOpacity>
             <Text
@@ -21,11 +21,17 @@ const TodoItems = ({ item, id, navigation }) => {
               navigation={navigation}
               onPress={() => navigation.navigate("EditForm", { id: id })}
             >
-              Edit
+              <FontAwesome5 name="edit" size={28} color="black" />
             </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => onPressHandler(id)}>
-            <Text style={styles.delete}>Delete</Text>
+            <Text style={styles.delete}>
+              <MaterialCommunityIcons
+                name="delete-forever"
+                size={34}
+                color="red"
+              />
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -54,18 +60,13 @@ const styles = StyleSheet.create({
     margin: 7,
   },
   edit: {
-    padding: 15,
-    // borderTopRightRadius: 10,
-    // borderBottomRightRadius: 10,
-    color: "white",
-    backgroundColor: "black",
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   delete: {
-    padding: 15,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    color: "white",
-    backgroundColor: "red",
+    paddingTop: 7,
+    paddingBottom: 10,
+    paddingRight: 10,
   },
 });
 

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Alert,
-  Button,
   StyleSheet,
   Text,
   TextInput,
@@ -11,7 +10,7 @@ import {
 import { useDispatch } from "react-redux";
 import { addItemToList } from "./actions/actions";
 
-const Form = ({ onSubmitHandler }) => {
+const Form = () => {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const onChangeHandler = (val) => {
@@ -20,18 +19,14 @@ const Form = ({ onSubmitHandler }) => {
   return (
     <View>
       <TextInput
+        style={styles.input}
         placeholder="Add todo's"
         value={text}
         onChangeText={(val) => {
           onChangeHandler(val);
         }}
       />
-      {/* <Button
-        
-        title="Add Todo's"
-        color="black"
-      /> */}
-      <TouchableOpacity>
+      <TouchableOpacity style={{ marginBottom: 10 }}>
         <Text
           style={styles.add}
           onPress={() => {
@@ -62,17 +57,23 @@ const Form = ({ onSubmitHandler }) => {
 
 const styles = StyleSheet.create({
   add: {
-    // flex:
     backgroundColor: "black",
     color: "white",
     textAlign: "center",
-    // justifyContent: "center",
     padding: 11,
     fontSize: 25,
     borderColor: "#bbb",
     borderWidth: 1,
     borderStyle: "solid",
     borderRadius: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderRadius: 7,
+    borderColor: "grey",
+    height: 50,
+    padding: 10,
+    marginBottom: 3,
   },
 });
 

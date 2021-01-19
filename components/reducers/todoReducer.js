@@ -36,6 +36,10 @@ const initialState = {
       id: "58694a0f1",
       title: "6th Item",
     },
+    {
+      id: "58694a0f2",
+      title: "7th Item",
+    },
   ],
   item: null,
   checking: false,

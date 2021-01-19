@@ -1,30 +1,21 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Button, SafeAreaView, StyleSheet, Text, View } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import { Alert, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
 import { readItem, updateItem } from "./actions/actions";
 
 const EditForm = (props) => {
   const item = useSelector((state) => state.todo.item);
   const dispatch = useDispatch();
-  // console.log(props.route.params.id);
-  const [text, setText] = useState("");
-  // console.log(item);
+  const [text, setText] = useState(null);
   useEffect(() => {
     if (item != null) {
       setText(item);
     }
     dispatch(readItem(props.route.params.id));
   }, [item]);
-  // console.log("editform", props.route.params.dataValue[0].id);
-  // console.log(props);
-  // const { id, title } = props.route.params.dataValue[0];
-  // // console.log(id);
-  // // console.log(title);
-  // const [text, setText] = useState(title);
   const onChangeHandler = (val) => {
-    // console.log(text);
     setText({
       ...text,
       title: val,
@@ -37,46 +28,59 @@ const EditForm = (props) => {
   return (
     <SafeAreaView>
       {text ? (
-        <View>
+        <View style={{ padding: 40 }}>
           <TextInput
+            style={styles.input}
             value={text.title}
             onChangeText={(val) => {
               onChangeHandler(val);
             }}
           />
-          <Button
-            title="Edit todo"
-            color="black"
-            onPress={() => editItemHandler()}
-          />
+          <TouchableOpacity style={{ marginBottom: 10 }}>
+            <Text
+              style={styles.add}
+              onPress={() => {
+                if (text.title.length > 0) {
+                  setText(null);
+                  editItemHandler();
+                } else {
+                  Alert.alert("Alert Title", "My Alert Msg", [
+                    {
+                      text: "Ask me later",
+                      onPress: () => console.log("Ask me later pressed"),
+                    },
+                  ]);
+                }
+              }}
+            >
+              Edit Todo's
+            </Text>
+          </TouchableOpacity>
         </View>
       ) : null}
-
-      {/* <View>{item ? (<View><Text>EditForm: {item.title}</Text><Text></Text></View>) : null}</View> */}
     </SafeAreaView>
-    //   <View style={styles.container}>
-    //     <TextInput
-    //       placeholder="edit todo's"
-    //       value={text}
-    //       onChangeText={(val) => {
-    //         onChangeHandler(val);
-    //       }}
-    //     />
-    //     <Button
-    //       title="edit Todo's"
-    //       color="black"
-    //       onPress={() => {
-    //         // Pass params back to home screen
-    //         props.navigation.navigate("Home", { text: text, id: id });
-    //       }}
-    //     />
-    //   </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 100,
+  add: {
+    backgroundColor: "black",
+    color: "white",
+    textAlign: "center",
+    padding: 11,
+    fontSize: 25,
+    borderColor: "#bbb",
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderRadius: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderRadius: 7,
+    borderColor: "grey",
+    height: 50,
+    padding: 10,
+    marginBottom: 3,
   },
 });
 
