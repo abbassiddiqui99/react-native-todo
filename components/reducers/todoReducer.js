@@ -1,6 +1,12 @@
 // import types
 
-import { DELETEITEM, TESTING } from "../contants/types";
+import {
+  ADDITEMTOLIST,
+  DELETEITEM,
+  READITEM,
+  TESTING,
+  UPDATEITEM,
+} from "../contants/types";
 
 // initial state
 
@@ -31,6 +37,7 @@ const initialState = {
       title: "6th Item",
     },
   ],
+  item: null,
   checking: false,
 };
 
@@ -46,6 +53,37 @@ export const todoReducer = (state = initialState, action) => {
         items: state.items.filter((item) => {
           return item.id !== action.payload;
         }),
+      };
+    case READITEM:
+      let arr = state.items.filter((item) => {
+        return item.id === action.payload;
+      });
+      //   console.log(arr);
+      //
+      //
+      arr = arr.values();
+      //
+      //
+      for (let x of arr) {
+        arr = x;
+      }
+      //   console.log(arr);
+      return {
+        ...state,
+        item: arr,
+      };
+    case UPDATEITEM:
+      return {
+        ...state,
+        items: state.items.map((item) => {
+          return item.id === action.payload.id ? action.payload : item;
+        }),
+        item: null,
+      };
+    case ADDITEMTOLIST:
+      return {
+        ...state,
+        items: [action.payload, ...state.items],
       };
     default:
       return state;

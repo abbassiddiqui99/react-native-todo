@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Alert,
   Button,
   StyleSheet,
   Text,
@@ -7,11 +8,13 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useDispatch } from "react-redux";
+import { addItemToList } from "./actions/actions";
 
 const Form = ({ onSubmitHandler }) => {
+  const dispatch = useDispatch();
   const [text, setText] = useState("");
   const onChangeHandler = (val) => {
-    console.log(val);
     setText(val);
   };
   return (
@@ -29,7 +32,27 @@ const Form = ({ onSubmitHandler }) => {
         color="black"
       /> */}
       <TouchableOpacity>
-        <Text style={styles.add} onPress={() => onSubmitHandler(text)}>
+        <Text
+          style={styles.add}
+          onPress={() => {
+            if (text.length > 0) {
+              dispatch(
+                addItemToList({
+                  id: new Date().getTime().toString(),
+                  title: text,
+                })
+              );
+              setText("");
+            } else {
+              Alert.alert("Alert Title", "My Alert Msg", [
+                {
+                  text: "Ask me later",
+                  onPress: () => console.log("Ask me later pressed"),
+                },
+              ]);
+            }
+          }}
+        >
           Add Todo's
         </Text>
       </TouchableOpacity>

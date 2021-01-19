@@ -1,17 +1,12 @@
 import React from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useDispatch } from "react-redux";
+import { deleteItem } from "./actions/actions";
 
-const TodoItems = ({
-  item,
-  id,
-  onPressHandler,
-  navigation,
-  getDataHandler,
-}) => {
-  const getDatafromHome = (id) => {
-    const dataValue = getDataHandler(id);
-    // console.log("daraValue todoItems", dataValue);
-    navigation.navigate("EditForm", { dataValue });
+const TodoItems = ({ item, id, navigation }) => {
+  const dispatch = useDispatch();
+  const onPressHandler = (id) => {
+    dispatch(deleteItem(id));
   };
 
   return (
@@ -24,7 +19,7 @@ const TodoItems = ({
             <Text
               style={styles.edit}
               navigation={navigation}
-              onPress={() => getDatafromHome(id)}
+              onPress={() => navigation.navigate("EditForm", { id: id })}
             >
               Edit
             </Text>

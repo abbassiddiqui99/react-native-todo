@@ -37,12 +37,7 @@ const Home = ({ navigation, route }) => {
   //     title: "6th Item",
   //   },
   // ]);
-  console.log("Route /home", route.params?.id);
-
-  const onPressHandler = (id) => {
-    dispatch(deleteItem(id));
-    // setData((prevData) => prevData.filter((item) => item.id !== id));
-  };
+  // console.log("Route /home", route.params?.id);
 
   const getDataHandler = (id) => {
     const getData = data.filter((item) => item.id === id);
@@ -74,8 +69,6 @@ const Home = ({ navigation, route }) => {
                   <TodoItems
                     item={item.title}
                     id={item.id}
-                    onPressHandler={onPressHandler}
-                    getDataHandler={getDataHandler}
                     navigation={navigation}
                   />
                 )}

@@ -1,1 +1,4 @@
 export const DELETEITEM = "DELETEITEM";
+export const READITEM = "READITEM";
+export const UPDATEITEM = "UPDATEITEM";
+export const ADDITEMTOLIST = "ADDITEMTOLIST";
