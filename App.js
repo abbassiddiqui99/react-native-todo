@@ -9,29 +9,30 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./components/Home";
 import EditForm from "./components/EditForm";
 import { Provider } from "react-redux";
-import store from "./store";
+import { store, persistor } from "./store";
+// import store from "./store";
 
 const App = () => {
   const Stack = createStackNavigator();
 
   return (
     <Provider store={store}>
-      {/* <PersistGate loading={null} persistor={persistor}> */}
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{ title: "Overview" }}
-          />
-          <Stack.Screen
-            name="EditForm"
-            component={EditForm}
-            options={{ title: "EditForm" }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-      {/* </PersistGate> */}
+      <PersistGate loading={null} persistor={persistor}>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{ title: "Overview" }}
+            />
+            <Stack.Screen
+              name="EditForm"
+              component={EditForm}
+              options={{ title: "EditForm" }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PersistGate>
     </Provider>
   );
 };
