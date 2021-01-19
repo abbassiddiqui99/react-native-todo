@@ -21,7 +21,11 @@ const TodoItems = ({
         {/* <Button title="Delete" /> */}
         <View style={styles.testing}>
           <TouchableOpacity>
-            <Text style={styles.edit} onPress={() => getDatafromHome(id)}>
+            <Text
+              style={styles.edit}
+              navigation={navigation}
+              onPress={() => getDatafromHome(id)}
+            >
               Edit
             </Text>
           </TouchableOpacity>

@@ -1,38 +1,47 @@
 import React, { useState } from "react";
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteItem } from "./actions/actions";
+// import { testingRedux } from "./actions/actions";
 import Form from "./Form";
 import Header from "./Header";
 import TodoItems from "./TodoItems";
 
-const Home = ({ navigation }) => {
-  const [data, setData] = useState([
-    {
-      id: "bd7acbea",
-      title: "First Item",
-    },
-    {
-      id: "3ac68afc",
-      title: "Second Item",
-    },
-    {
-      id: "58694a0f",
-      title: "Third Item",
-    },
-    {
-      id: "bd7acbea1",
-      title: "4th Item",
-    },
-    {
-      id: "3ac68afc1",
-      title: "5th Item",
-    },
-    {
-      id: "58694a0f1",
-      title: "6th Item",
-    },
-  ]);
+const Home = ({ navigation, route }) => {
+  const todoListData = useSelector((state) => state.todo.items);
+  // console.log("todoListData", todoListData);
+  const dispatch = useDispatch();
+  // const [data, setData] = useState([
+  //   {
+  //     id: "bd7acbea",
+  //     title: "First Item",
+  //   },
+  //   {
+  //     id: "3ac68afc",
+  //     title: "Second Item",
+  //   },
+  //   {
+  //     id: "58694a0f",
+  //     title: "Third Item",
+  //   },
+  //   {
+  //     id: "bd7acbea1",
+  //     title: "4th Item",
+  //   },
+  //   {
+  //     id: "3ac68afc1",
+  //     title: "5th Item",
+  //   },
+  //   {
+  //     id: "58694a0f1",
+  //     title: "6th Item",
+  //   },
+  // ]);
+  console.log("Route /home", route.params?.id);
+
   const onPressHandler = (id) => {
-    setData((prevData) => prevData.filter((item) => item.id !== id));
+    dispatch(deleteItem(id));
+    // setData((prevData) => prevData.filter((item) => item.id !== id));
   };
 
   const getDataHandler = (id) => {
@@ -60,7 +69,7 @@ const Home = ({ navigation }) => {
             <Form onSubmitHandler={onSubmitHandler} />
             <View style={styles.item}>
               <FlatList
-                data={data}
+                data={todoListData}
                 renderItem={({ item }) => (
                   <TodoItems
                     item={item.title}

@@ -4,12 +4,13 @@ import { TextInput } from "react-native-gesture-handler";
 
 const EditForm = (props) => {
   // console.log("editform", props.route.params.dataValue[0].id);
+  // console.log(props);
   const { id, title } = props.route.params.dataValue[0];
-  console.log(id);
-  console.log(title);
+  // console.log(id);
+  // console.log(title);
   const [text, setText] = useState(title);
   const onChangeHandler = (val) => {
-    console.log(val);
+    // console.log(val);
     setText(val);
   };
   return (
@@ -22,7 +23,14 @@ const EditForm = (props) => {
             onChangeHandler(val);
           }}
         />
-        <Button title="edit Todo's" color="black" />
+        <Button
+          title="edit Todo's"
+          color="black"
+          onPress={() => {
+            // Pass params back to home screen
+            props.navigation.navigate("Home", { text: text, id: id });
+          }}
+        />
       </View>
     </SafeAreaView>
   );

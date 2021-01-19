@@ -7,6 +7,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./components/Home";
 import EditForm from "./components/EditForm";
+import { Provider } from "react-redux";
+import store from "./components/store";
 
 // import 'react-native-gesture-handler';
 // import * as React from 'react';
@@ -60,21 +62,23 @@ const App = () => {
   const Stack = createStackNavigator();
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ title: "Overview" }}
-        />
-        <Stack.Screen
-          name="EditForm"
-          component={EditForm}
-          options={{ title: "EditForm" }}
-        />
-        {/* <Stack.Screen name="Details" component={DetailsScreen} /> */}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{ title: "Overview" }}
+          />
+          <Stack.Screen
+            name="EditForm"
+            component={EditForm}
+            options={{ title: "EditForm" }}
+          />
+          {/* <Stack.Screen name="Details" component={DetailsScreen} /> */}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
 
     // <View style={styles.container}>
     //   {/* Header Here */}
