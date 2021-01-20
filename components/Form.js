@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { addItemToList } from "./actions/actions";
+import FadeInView from "./animation/animation";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,14 @@ const Form = () => {
     setText(val);
   };
   return (
-    <View>
+    <View
+      style={{
+        backgroundColor: "#ededed",
+        paddingVertical: 8,
+        paddingHorizontal: 30,
+        // borderBottomEndRadius: 10,
+      }}
+    >
       <TextInput
         style={styles.input}
         placeholder="Add todo's"
@@ -39,10 +47,10 @@ const Form = () => {
               );
               setText("");
             } else {
-              Alert.alert("Alert Title", "My Alert Msg", [
+              Alert.alert("Alert", "Input is empty", [
                 {
-                  text: "Ask me later",
-                  onPress: () => console.log("Ask me later pressed"),
+                  text: "Cancel",
+                  // onPress: () => console.log("Ask me later pressed"),
                 },
               ]);
             }

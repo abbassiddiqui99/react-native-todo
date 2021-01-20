@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
 import { deleteItem } from "./actions/actions";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
@@ -11,7 +11,16 @@ const TodoItems = ({ item, id, navigation }) => {
   };
 
   return (
-    <TouchableOpacity>
+    <TouchableOpacity
+      style={{ marginTop: 7 }}
+      onPress={() =>
+        Alert.alert(item, id, [
+          {
+            text: "Ok",
+          },
+        ])
+      }
+    >
       <View style={styles.container}>
         <View>
           <Text style={styles.item}>{item}</Text>
@@ -26,7 +35,21 @@ const TodoItems = ({ item, id, navigation }) => {
               <FontAwesome5 name="edit" size={28} color="black" />
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => onPressHandler(id)}>
+          {/* <TouchableOpacity onPress={() => onPressHandler(id)}> */}
+          {/* Going to Edit here */}
+          <TouchableOpacity
+            onPress={() =>
+              Alert.alert("Alert", "To Delete press confirm", [
+                {
+                  text: "Cancel",
+                },
+                {
+                  text: "Confirm",
+                  onPress: () => onPressHandler(id),
+                },
+              ])
+            }
+          >
             <Text style={styles.delete}>
               <MaterialCommunityIcons
                 name="delete-forever"
@@ -51,6 +74,8 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderRadius: 10,
     margin: 2,
+    marginLeft: 30,
+    marginRight: 30,
   },
   testing: {
     // flex: 1,

@@ -23,6 +23,7 @@ const EditForm = (props) => {
   };
   const editItemHandler = () => {
     dispatch(updateItem(text));
+    setText(null);
     props.navigation.navigate("Home");
   };
   return (
@@ -41,13 +42,24 @@ const EditForm = (props) => {
               style={styles.add}
               onPress={() => {
                 if (text.title.length > 0) {
-                  setText(null);
-                  editItemHandler();
+                  if (text.title !== item.title) {
+                    Alert.alert("Update", "Press continue for update", [
+                      {
+                        text: "Cancel",
+                      },
+                      {
+                        text: "Confirm",
+                        onPress: () => editItemHandler(),
+                      },
+                    ]);
+                  }
+                  if (text.title === item.title) {
+                    editItemHandler();
+                  }
                 } else {
-                  Alert.alert("Alert Title", "My Alert Msg", [
+                  Alert.alert("Alert", "Insert Something First!", [
                     {
-                      text: "Ask me later",
-                      onPress: () => console.log("Ask me later pressed"),
+                      text: "Cancel",
                     },
                   ]);
                 }

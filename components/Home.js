@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import { FlatList, View } from "react-native";
+import { FlatList, View, Text } from "react-native";
 // import { ScrollView } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
+import FadeInView from "./animation/animation";
 import Form from "./Form";
 import Header from "./Header";
 import TodoItems from "./TodoItems";
@@ -14,8 +15,15 @@ const Home = ({ navigation }) => {
   const [checking, setChecking] = useState(false);
   const [previous, setPrevious] = useState(100);
 
+  const headerComponent = () => (
+    <View>
+      <Header />
+      <Form />
+    </View>
+  );
+
   const _onScroll = (e) => {
-    console.log(e);
+    // console.log(e);
     if (e > 100) {
       setChecking(true);
       // setPrevious(e);
@@ -35,18 +43,20 @@ const Home = ({ navigation }) => {
 
   return (
     <View>
-      {checking === true ? null : <Header />}
-      {checking === true ? null : <Form />}
-      {/* <Form /> */}
-      <View>
+      <View style={{ marginBottom: 7 }}>
         <FlatList
           onScroll={(e) => _onScroll(e.nativeEvent.contentOffset.y)}
           data={todoListData}
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <TodoItems item={item.title} id={item.id} navigation={navigation} />
           )}
+          ListHeaderComponent={headerComponent}
+          stickyHeaderIndices={[0]}
           keyExtractor={(item) => item.id}
         />
+        {/* </View> */}
       </View>
     </View>
   );
