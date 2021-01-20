@@ -13,7 +13,9 @@ const TodoItems = ({ item, id, navigation }) => {
   return (
     <TouchableOpacity>
       <View style={styles.container}>
-        <Text style={styles.item}>{item}</Text>
+        <View>
+          <Text style={styles.item}>{item}</Text>
+        </View>
         <View style={styles.testing}>
           <TouchableOpacity>
             <Text
@@ -41,7 +43,7 @@ const TodoItems = ({ item, id, navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     borderColor: "#bbb",
@@ -51,9 +53,9 @@ const styles = StyleSheet.create({
     margin: 2,
   },
   testing: {
-    flex: 1,
+    // flex: 1,
     flexDirection: "row",
-    justifyContent: "flex-end",
+    // justifyContent: "flex-end",
   },
   item: {
     padding: 8,

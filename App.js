@@ -23,12 +23,12 @@ const App = () => {
             <Stack.Screen
               name="Home"
               component={Home}
-              options={{ title: "Overview" }}
+              options={{ title: "TodoList" }}
             />
             <Stack.Screen
               name="EditForm"
               component={EditForm}
-              options={{ title: "EditForm" }}
+              options={{ title: "Edit" }}
             />
           </Stack.Navigator>
         </NavigationContainer>
