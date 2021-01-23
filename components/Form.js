@@ -11,55 +11,66 @@ import { useDispatch } from "react-redux";
 import { addItemToList } from "./actions/actions";
 import FadeInView from "./animation/animation";
 
-const Form = () => {
+const Form = (props) => {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const onChangeHandler = (val) => {
     setText(val);
   };
+
   return (
-    <View
-      style={{
-        backgroundColor: "#ededed",
-        paddingVertical: 8,
-        paddingHorizontal: 30,
-        // borderBottomEndRadius: 10,
-      }}
-    >
-      <TextInput
-        style={styles.input}
-        placeholder="Add todo's"
-        value={text}
-        onChangeText={(val) => {
-          onChangeHandler(val);
+    <FadeInView>
+      <View
+        style={{
+          backgroundColor: "#ededed",
+          padding: 40,
         }}
-      />
-      <TouchableOpacity style={{ marginBottom: 10 }}>
-        <Text
-          style={styles.add}
-          onPress={() => {
-            if (text.length > 0) {
-              dispatch(
-                addItemToList({
-                  id: new Date().getTime().toString(),
-                  title: text,
-                })
-              );
-              setText("");
-            } else {
-              Alert.alert("Alert", "Input is empty", [
-                {
-                  text: "Cancel",
-                  // onPress: () => console.log("Ask me later pressed"),
-                },
-              ]);
-            }
+      >
+        <TextInput
+          style={styles.input}
+          placeholder="Add todo's"
+          value={text}
+          onChangeText={(val) => {
+            onChangeHandler(val);
           }}
-        >
-          Add Todo's
-        </Text>
-      </TouchableOpacity>
-    </View>
+          onSubmitEditing={() => {
+            dispatch(
+              addItemToList({
+                id: new Date().getTime().toString(),
+                title: text,
+              })
+            );
+            setText("");
+            props.navigation.navigate("Home");
+          }}
+        />
+        <TouchableOpacity style={{ marginBottom: 10 }}>
+          <Text
+            style={styles.add}
+            onPress={() => {
+              if (text.length > 0) {
+                dispatch(
+                  addItemToList({
+                    id: new Date().getTime().toString(),
+                    title: text,
+                  })
+                );
+                setText("");
+                props.navigation.navigate("Home");
+              } else {
+                Alert.alert("Insert!", "Input is empty", [
+                  {
+                    text: "Cancel",
+                  },
+                ]);
+              }
+            }}
+          >
+            Add Todo's
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </FadeInView>
   );
 };
 

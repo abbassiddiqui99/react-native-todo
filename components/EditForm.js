@@ -4,6 +4,7 @@ import { Alert, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
 import { readItem, updateItem } from "./actions/actions";
+import FadeInView from "./animation/animation";
 
 const EditForm = (props) => {
   const item = useSelector((state) => state.todo.item);
@@ -27,23 +28,20 @@ const EditForm = (props) => {
     props.navigation.navigate("Home");
   };
   return (
-    <SafeAreaView>
-      {text ? (
-        <View style={{ padding: 40 }}>
-          <TextInput
-            style={styles.input}
-            value={text.title}
-            onChangeText={(val) => {
-              onChangeHandler(val);
-            }}
-          />
-          <TouchableOpacity style={{ marginBottom: 10 }}>
-            <Text
-              style={styles.add}
-              onPress={() => {
+    <FadeInView>
+      <SafeAreaView>
+        {text ? (
+          <View style={{ padding: 40 }}>
+            <TextInput
+              style={styles.input}
+              value={text.title}
+              onChangeText={(val) => {
+                onChangeHandler(val);
+              }}
+              onSubmitEditing={() => {
                 if (text.title.length > 0) {
                   if (text.title !== item.title) {
-                    Alert.alert("Update", "Press continue for update", [
+                    Alert.alert("Confirm!", "Press continue for update", [
                       {
                         text: "Cancel",
                       },
@@ -57,20 +55,49 @@ const EditForm = (props) => {
                     editItemHandler();
                   }
                 } else {
-                  Alert.alert("Alert", "Insert Something First!", [
+                  Alert.alert("Input!", "Insert Something First!", [
                     {
                       text: "Cancel",
                     },
                   ]);
                 }
               }}
-            >
-              Edit Todo's
-            </Text>
-          </TouchableOpacity>
-        </View>
-      ) : null}
-    </SafeAreaView>
+            />
+            <TouchableOpacity style={{ marginBottom: 10 }}>
+              <Text
+                style={styles.add}
+                onPress={() => {
+                  if (text.title.length > 0) {
+                    if (text.title !== item.title) {
+                      Alert.alert("Confirm!", "Press continue for update", [
+                        {
+                          text: "Cancel",
+                        },
+                        {
+                          text: "Confirm",
+                          onPress: () => editItemHandler(),
+                        },
+                      ]);
+                    }
+                    if (text.title === item.title) {
+                      editItemHandler();
+                    }
+                  } else {
+                    Alert.alert("Input!", "Insert Something First!", [
+                      {
+                        text: "Cancel",
+                      },
+                    ]);
+                  }
+                }}
+              >
+                Edit Todo's
+              </Text>
+            </TouchableOpacity>
+          </View>
+        ) : null}
+      </SafeAreaView>
+    </FadeInView>
   );
 };
 

@@ -14,7 +14,7 @@ const TodoItems = ({ item, id, navigation }) => {
     <TouchableOpacity
       style={{ marginTop: 7 }}
       onPress={() =>
-        Alert.alert(item, id, [
+        Alert.alert(item, item, [
           {
             text: "Ok",
           },
@@ -39,7 +39,7 @@ const TodoItems = ({ item, id, navigation }) => {
           {/* Going to Edit here */}
           <TouchableOpacity
             onPress={() =>
-              Alert.alert("Alert", "To Delete press confirm", [
+              Alert.alert("Confirm!!!", "To Delete press confirm", [
                 {
                   text: "Cancel",
                 },

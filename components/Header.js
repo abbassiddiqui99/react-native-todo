@@ -1,28 +1,47 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import FadeInView from "./animation/animation";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { AntDesign } from "@expo/vector-icons";
 
-const Header = () => {
+const Header = ({ navigation }) => {
   return (
-    // <FadeInView>
-    <View style={styles.container}>
-      <Text style={styles.title}>Todo's List</Text>
+    <View>
+      <View style={styles.container}>
+        <Text style={styles.title}>Todo's List</Text>
+
+        <TouchableOpacity onPress={() => navigation.navigate("Form")}>
+          <Text style={styles.plus}>
+            <AntDesign name="pluscircleo" size={34} color="white" />
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
-    // </FadeInView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "black",
+    zIndex: 1,
+    position: "absolute",
+    top: 0,
+    right: 0,
+    left: 0,
     height: 80,
-    paddingTop: 30,
+    backgroundColor: "black",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   title: {
-    textAlign: "center",
+    marginTop: 30,
+    marginLeft: 15,
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
+  },
+  plus: {
+    color: "white",
+    marginTop: 25,
+    marginRight: 18,
   },
 });
 

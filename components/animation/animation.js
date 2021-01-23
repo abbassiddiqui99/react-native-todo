@@ -7,7 +7,7 @@ const FadeInView = (props) => {
   useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 600,
+      duration: 550,
       useNativeDriver: true,
     }).start();
   }, [fadeAnim]);

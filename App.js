@@ -1,16 +1,12 @@
-import React, { useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import React from "react";
 import { PersistGate } from "redux-persist/integration/react";
-import Form from "./components/Form";
-import Header from "./components/Header";
-import TodoItems from "./components/TodoItems";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./components/Home";
 import EditForm from "./components/EditForm";
 import { Provider } from "react-redux";
 import { store, persistor } from "./store";
-// import store from "./store";
+import Form from "./components/Form";
 
 const App = () => {
   const Stack = createStackNavigator();
@@ -23,12 +19,17 @@ const App = () => {
             <Stack.Screen
               name="Home"
               component={Home}
-              options={{ title: "TodoList" }}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="EditForm"
               component={EditForm}
               options={{ title: "Edit" }}
+            />
+            <Stack.Screen
+              name="Form"
+              component={Form}
+              options={{ title: "Add Todo" }}
             />
           </Stack.Navigator>
         </NavigationContainer>
